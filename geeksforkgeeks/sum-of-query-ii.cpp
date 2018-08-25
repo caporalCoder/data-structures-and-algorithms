@@ -68,6 +68,7 @@ int main() {
 			cin >> l >> r;
 			cout << cumSum[r] - cumSum[l - 1] << " ";
 		}
+		cout << endl;
 	}
 
 	return 0;
