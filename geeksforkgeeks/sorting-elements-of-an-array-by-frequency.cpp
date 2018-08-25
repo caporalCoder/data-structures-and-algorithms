@@ -58,7 +58,7 @@ int main() {
 		for(int i = 0; i < n; ++i) {
 			cin >> data[i];
 		}
-		unordered_map<int, int> mp;
+		unordered_map<int, int8> mp;
 		for(int elem: data) {
 			++mp[elem];
 		}
