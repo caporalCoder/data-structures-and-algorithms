@@ -59,7 +59,7 @@ set<string> LCS(const string& a, const string& b) {
 					result.clear();
 					result.insert(a.substr(from, current));
 					maxLen = current;
-				} else {
+				} else if(current == maxLen) {
 					result.insert(a.substr(from, current));
 				}
 			}
@@ -72,17 +72,25 @@ int main() {
 	
 	std::ios::sync_with_stdio(false);
 	string A, B;
+
+	bool blank = true;
 	
 	while(cin >> A >> B) {
+		if(!blank) {
+			cout << endl;
+		} else {
+			blank = false;
+		}
+
 		set<string>  result = LCS(A, B);
+
 		if(result.empty()) {
 			cout << "No common sequence." << endl;
 		} else {
 			for(set<string>::const_iterator it = result.begin(); it != result.end(); ++it) {
 				cout << *it << endl;
 			}
-		}	
-		cout << endl;
+		}
 	}
 
 	return 0;
