@@ -31,23 +31,35 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+long long primeSum(long long n) {
+	long long m = n;
+	 long long sum = 1;
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
+	 int s = sqrt(n) + 1;
+	for(int i = 2; i <= s; ++i) {
+		int k = 0;
+		while(n % i == 0) {
+			++k;
+			n /= i;
+		}
+		if (k != 0){
+			sum = sum * ((pow(i, k + 1) - 1) / ( i - 1));
+		}
+	}
+	if (n > 1) {
+		sum *= (pow(n, 2) - 1) / (n - 1);
+	}
+	return sum - m ;
 }
 
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+int main() {
+	int T;
+	cin >> T;
+	while (T--) {
+		long long n;
+		cin >> n;
+		
+		cout << primeSum(n) << endl;
 	}
+	return 0;
 }

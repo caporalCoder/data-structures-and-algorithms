@@ -31,23 +31,23 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+int main() {
+	long long A, B, C, D;
+	cin >> A >> B >> C >> D;
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
+	long long count = 0;
 
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+	for(int w = 1; w <= A; ++w) {
+		for(int x = 1; x <= B; ++x) {
+			for(int y = 1; y <= C; ++y) {
+				for(int z = 1; z <=D; ++z) {
+					if (w ^ x ^ y ^ z != 0) {
+						++count;
+					}
+				}
+			}
+		}
 	}
+	cout << count << endl;
+	return 0;
 }

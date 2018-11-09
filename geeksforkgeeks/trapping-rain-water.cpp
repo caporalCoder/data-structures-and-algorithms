@@ -31,23 +31,33 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+int main() {
+	int T;
+	cin >> T;
+	while(T--) {
+		int n;
+		cin >> n;
+		vector<int> data(n);
+		for(int i = 0; i < n; ++i) {
+			cin >> data[i];
+		}
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
+		int waterQuantity = 0;
 
+		int left = 0, right = n - 1;
+		int maxLeft = 0, maxRight = 0;
 
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+		while (left < right) {
+			if (data[left] < data[right]) {
+				(data[left] >= maxLeft) ? (maxLeft = data[left]) : waterQuantity += (maxLeft - data[left]);
+				++left;
+			} else {
+				(data[right] >= maxRight) ? (maxRight = data[right]) : waterQuantity += (maxRight - data[right]);
+				--right;
+			}
+		}
+		cout << waterQuantity << endl;
+
 	}
+	return 0;
 }

@@ -31,23 +31,46 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
-
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
+void sieve(vector<bool>& is_prime, long long n) {
+	is_prime[0] = is_prime[1] = false;
+	for (int i = 2; i <= n; i++) {
+	    if (is_prime[i] && (long long)i * i <= n) {
+	        for (int j = i * i; j <= n; j += i)
+	            is_prime[j] = false;
+	    }
+	}
 }
 
+int main() {
+	std::vector<bool> is_prime(3000000, true);
 
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+	sieve(is_prime, 3000000);
+
+	vector<long long> primeNumbers;
+
+	for(long long i = 2; i <= 3000000; ++i) {
+		if (is_prime[i]) {
+			primeNumbers.push_back(i);
+		}
 	}
+
+	long long T;
+	cin >> T;
+	while(T--) {
+		long long N;
+
+
+		cin >> N;
+		long long sum = 0;
+
+		int i = 0;
+
+		while(primeNumbers[i] <= N) {
+			sum += primeNumbers[i];
+			++i;
+		}
+
+		cout << sum << endl;
+	}
+	return 0;
 }

@@ -31,23 +31,33 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+int main() {
+	long long N, Q;
+	cin >> N >> Q;
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
+	vector<bitset<32> > listBits;
 
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+	string bit;
+	for(int i = 0 ; i < N; ++i) {
+		cin >> bit;
+		listBits.push_back(bitset<32>(bit));
 	}
+
+
+	for(int i = 0; i < N; ++i) {
+		long long l, r;
+		string b;
+		cin >> l >> r >> b;
+
+		unsigned long res = 0;
+
+		bitset<32> bs(b);
+
+		for(int j = l; j <= r; ++j) {
+       		res = max(res, (listBits[i] ^ bs).to_ulong());
+		}
+		cout << res << endl;
+	}
+
+	return 0;
 }

@@ -9,6 +9,7 @@
 #include <vector>
 #include <set>
 #include <stack>
+#include <algorithm>
 #include <queue>
 #include <iostream>
 #include <fstream>
@@ -31,23 +32,20 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+int main() {
+	int n, k;
+	cin >> n >> k;
+	string str;
+	cin >> str;
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
-
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+	int i, j;
+	for(i = 0; i < n - 1; ++i) {
+		j = i;
+		while (j < n && str[j] == str[j + 1]) ++j;
+		if (j - i + 1 == k) break;
 	}
+	str.erase(str.begin() + i , str.begin() + j + 1);
+
+	std::cout << str << endl;
+	return 0;
 }

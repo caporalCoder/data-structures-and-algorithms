@@ -11,6 +11,7 @@
 #include <stack>
 #include <queue>
 #include <iostream>
+#include <algorithm>
 #include <fstream>
 #include <chrono>
 #include <complex>
@@ -35,8 +36,35 @@ int main() {
 	int T;
 	cin >> T;
 	while(T--) {
-		vector<vector<int>> board(3, vector<int>(3));
+		int amount;
+		cin >> amount;
+		int n;
+		cin >> n;
+		vector<int> billed(n);
+		for(int i = 0; i < n; ++i) cin >> billed[i];
+		
+		vector<int> dp(10001, 0);
+		for(int i = 0; i <= 10000; ++i) dp[i] = 10000;
+
+		dp[0] = 0;
+
+		sort(billed.begin(), billed.end());
+
+        for (int i = 0; i < n; ++i){
+            for (int j=10000; j >= 0; --j) {
+                if (j + billed[i] <= 10000 && dp[j+billed[i]] > dp[j]+1){
+                    dp[j+billed[i]] = dp[j]+1;
+                }
+            }
+        }
+        int i = 0;
+        for (i = amount; i <= 10000; i++){
+            if (dp[i]!= 10000) break;
+        }
+
+       	cout << i << " " << dp[i] << endl;
 		
 	}
 	return 0;
 }
+

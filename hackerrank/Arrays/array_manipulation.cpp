@@ -28,26 +28,23 @@
 #define mem(a,val) memset(a,val,sizeof(a))
 #define eb emplace_back
 
+
+string convertDecimalToBase(int n, int base) {
+	string result = "";
+	while (n >= base) {
+		result = to_string(n % base) + result;
+	
+		n /= base;
+	}
+	if (n != 0) {
+		result = to_string(n) + result;
+	}
+	return result;
+}
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
-
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
-
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
-	}
+int main() {
+	
+	return 0;
 }

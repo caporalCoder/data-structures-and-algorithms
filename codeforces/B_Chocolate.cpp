@@ -31,23 +31,26 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
-
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
-
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+int main() {
+	unsigned long long n;
+	cin >> n;
+	vector<unsigned long long> bar;
+	int position;
+	for(unsigned long long i = 0; i < n ; ++i) {
+		cin >> position;
+		if (position == 1) {
+			bar.push_back(i);
+		}
 	}
+
+
+	unsigned long long count = 0;
+	count = (bar.size() == 0) ? 0 : 1;
+
+	for(int i = 1; i < bar.size(); ++i) {
+		count *= (bar[i] - bar[i - 1]);
+	}
+
+	cout << count << endl;
+	return 0;
 }

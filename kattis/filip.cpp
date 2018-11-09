@@ -31,23 +31,19 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
-
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
-
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+int main() {
+	int A, B;
+	cin >> A >> B;
+	int result = 0, result2 = 0;
+	while(A > 0) {
+		result = 10 * result +  A % 10;
+		A/=10;
 	}
+	while(B > 0) {
+		result2 = 10 * result2 +  B % 10;
+		B/=10;
+	}
+	cout << max(result, result2) << endl;
+
+	return 0;
 }

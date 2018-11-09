@@ -31,23 +31,36 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+int main() {
+	long long n, t;
+	cin >> n >> t;
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
-
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+	vector<long long> books(n);
+	for(int i = 0; i < n; ++i) {
+		cin >> books[i];
 	}
+
+	long long nbbook = 0;
+	long long i = 0;
+
+	long long sum = books[0]; 
+
+	if (sum <= t) nbbook++;
+
+	for(int j = 1; j < n; ++j) {
+		sum += books[j];
+		if (sum > t) {
+			sum -= books[i++];
+			while (i < j  && sum >= t) {
+				sum -= books[i++];
+			} 
+		}
+		if (sum <= t) {
+			nbbook = max(nbbook, j - i + 1);
+		}
+		
+	}
+	
+	cout << nbbook << endl;
+	return 0;
 }

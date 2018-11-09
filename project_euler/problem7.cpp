@@ -31,23 +31,34 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+int main() {
+	long long T;
+	cin >> T;
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
-
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+	vector<bool> is_prime(104744, true);
+	is_prime[0] = is_prime[1] = false;
+	for (int i = 2; i * i <= 104744; i++) {
+	    if (is_prime[i]) {
+	        for (int j = i * i; j <= 104744; j += i)
+	            is_prime[j] = false;
+	    }
 	}
+
+	unordered_map<long long , long long> mp;
+	int pos = 1;
+	for(int i = 2; i <= 104744; ++i) {
+		if (is_prime[i]) {
+			mp[pos++] = i;
+		}
+	}
+
+
+	while (T--) {
+		long long N;
+		cin >> N;
+
+		cout << mp[N] << endl;
+
+	}
+	return 0;
 }

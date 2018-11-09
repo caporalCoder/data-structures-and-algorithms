@@ -31,23 +31,46 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+int main() {
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
+	int T;
+	cin >> T;
+	while(T--) {
+		long long n, m;
+		cin >> n >> m;
 
+		vector<long long> A(n);
 
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+		for(int i = 0 ; i < n; ++i) {
+			cin >> A[i];
+		}
+
+		long long maxSum = 0;
+
+		for(int i = 0; i < n; ++i) {
+
+			if (A[i] == m) {
+				int j = i - 1;
+				long long localSum = A[i];
+				while(j >= 0 && A[j] > A[i]) {
+					localSum += A[j];
+					--j;
+				}
+
+				j = i + 1;
+				while (j < n  && A[j] > A[i]) {
+					localSum += A[j];
+					++j;
+				}
+
+				maxSum = max(maxSum, localSum);
+			}
+
+		}
+
+		cout << maxSum << endl;
 	}
+
+
+	return 0;
 }

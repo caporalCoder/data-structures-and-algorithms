@@ -31,23 +31,40 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
-
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
+long long sod(long long n) {
+	long long sum = 0;
+	while (n > 0) {
+		sum += n % 10;
+		n /= 10;
+	}
+	return sum;
 }
 
+long long primeFactor(long long n) {
+	long long sum = 0;
 
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+	for(int i = 2; i <= sqrt(n); ++i) {
+		int k = 0;
+		while(n % i == 0) {
+			++k;
+			n /=i;
+		}
+		if (k != 0) {
+			sum += i * k;
+		}
 	}
+	return sum;
+}
+
+int main() {
+	int T;
+	cin >> T;
+	while(T--) {
+		long n;
+		cin >> n;
+
+		cout << int(sod(n) == primeFactor(n)) << endl;
+
+	}
+	return 0;
 }

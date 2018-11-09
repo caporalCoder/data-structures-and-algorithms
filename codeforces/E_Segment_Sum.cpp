@@ -31,23 +31,21 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+int main() {
+	unsigned long long l, r, k;
+	cin >> l >> r >> k;
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
+	long long sum  = 0;
+	for(unsigned long long i = l; i <= r; ++i) {
+		unordered_set<int> st;
 
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+		unsigned long long m = i;
+		while(m > 0) {
+			st.insert(m % 10);
+			m /= 10;
+		}
+		if (st.size() <=k) sum += i;
 	}
+	cout << sum << endl;
+	return 0;
 }

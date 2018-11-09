@@ -31,23 +31,36 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
-
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
+long long sod(long long n) {
+	long long sum = 0;
+	while (n > 0) {
+		sum += n % 10;
+		n /= 10;
+	}
+	return sum;
 }
 
+int main() {
 
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+	string str;
+	long long k;
+	cin >> str >> k;
+
+	long long sum = 0;
+
+	for(int i = 0; i < str.size(); ++i) {
+		sum += (str[i] - '0');
 	}
+
+
+
+	long long n  = k * sod(sum);
+
+	while (n > 9) {
+		n = sod(n);
+	}
+
+	cout << n << endl;
+	
+	return 0;
 }

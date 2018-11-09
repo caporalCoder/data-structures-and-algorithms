@@ -31,23 +31,27 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+int main() {
+	long long T;
+	cin >> T;
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
+	while(T--) {
+		long long N;
+		cin >> N;
 
+		long long int fib1 = 2, fib2 = 8; 
+	    long long int sum = fib1 + fib2; 
 
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+	    while (fib2 <= N) {
+	        long long int fib = 4 * fib2 + fib1; 
+	        if (fib > N) 
+	            break; 
+	        fib1 = fib2; 
+	        fib2 = fib; 
+	        sum += fib2; 
+	    } 
+	    cout << sum << endl;
+
 	}
+	return 0;
 }

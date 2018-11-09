@@ -31,23 +31,34 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+dfs(set<pair<int, int>> st, int& count, pair<int, int> point, vector<pair<int, int>> path) {
+	for(int i = -1; i <= 1; ++i) {
+		for(int j = -1; j <= 1; ++j) {
+			if (i != 0 && j != 0) {
+				if (!st.count(make_pair(point.first + i, point.second + j))) return;
+				
+			}
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
+		}
+	}
+	
 }
 
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+int main() {
+	int N;
+	cin >> N;
+	set<pair<int, int>> st;
+	int x, y;
+	for(int i = 0; i < N; ++i) {
+		cin >> x >> y;
+		st.insert(make_pair(x, y));
 	}
+
+	int count = 0;
+	for(pair<int, int> point: st) {
+		dfs(st, count, point, {point});
+	}
+
+	cout << cout << endl;
+	return 0;
 }

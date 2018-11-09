@@ -31,23 +31,18 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
-
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
+long long arithmeticSum(long long n) {
+	return n * (n + 1) / 2;
 }
 
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+int main() {
+	int T;
+	cin >> T;
+	while(T--) {
+		int N;
+		cin >> N;
+		--N;
+		cout << 3 * arithmeticSum(N / 3) + 5 * arithmeticSum(N / 5) - 15 * arithmeticSum(N / 15) << endl;
 	}
+	return 0;
 }

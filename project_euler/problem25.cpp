@@ -31,23 +31,31 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
+long long numberOfDigits(long long n) { 
+    if (n == 1) 
+        return 1; 
+    // using phi = 1.6180339887498948 
+    long double d = (n * log10(1.6180339887498948)) - ((log10(5)) / 2); 
+    return ceil(d); 
+} 
 
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
-}
 
+int main() {
+	long long T;
+	cin >> T;
+	while(T--) {
+		long long N;
+		cin >> N;
+		int i = 1;
+		while(true) {
+			int m = numberOfDigits(i);
+			if (m == N) {
+				cout << i << endl;
+				break;
+			}
+			++i;
+		}
 
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
 	}
+	return 0;
 }

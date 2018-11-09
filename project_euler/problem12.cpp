@@ -31,12 +31,51 @@
 	
 using namespace std;
 
-int main() {
-	int T;
-	cin >> T;
-	while(T--) {
-		vector<vector<int>> board(3, vector<int>(3));
-		
+int nod(int n) {
+	int res = 1;
+	for(int i = 2; i <= sqrt(n); ++i) {
+		int k = 0;
+		while(n % i == 0) {
+			++k;
+			n /= 2;
+		}
+		if (k != 0) {
+			res *= (k + 1);
+		}
 	}
+	return res + 2;
+}
+
+int main() {
+
+	vector<pair<int, int> > listElem;
+	listElem.push_back(make_pair(1, 1));
+	int r = 2;
+	while (true) {
+		int k = listElem.back().first + r;
+		int v = nod(k);
+		cout << k << "  "<< 	k << endl;;
+		listElem.push_back(make_pair(k, v));
+		++r;
+	}
+
+
+	long long N;
+	cin >> N;
+
+	for(int i = 0; i < N; ++i) {
+		int k;
+		cin >> k;
+
+		int j = 0;;
+		while (j < listElem.size() && listElem[j].second <= k) {
+			cout << listElem[j].first << " " << listElem[j].second << endl; 
+			++j;
+		}
+		cout << endl;
+		cout << listElem[j].first << endl;
+	}
+
+
 	return 0;
 }

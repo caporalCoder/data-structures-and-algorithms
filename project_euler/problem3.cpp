@@ -31,23 +31,30 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
-
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
+long long largestPrimeFactor(long long n) {
+	long long res = 1;
+	for(int i = 2; i <= sqrt(n); ++i) {
+		int k = 0;
+		while(n % i == 0) {
+			++k;
+			n /= i;
+		}
+		if (k != 0) {
+			res = i;
+		}
+	}
+	if (n > 1) res = n;
+	return res;
 }
 
+int main() {
+	long long T;
+	cin >> T;
+	while(T--) {
+		long long N;
+		cin >> N;
+		cout << largestPrimeFactor(N) << endl;
 
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
 	}
+	return 0;
 }

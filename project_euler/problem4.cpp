@@ -8,6 +8,7 @@
 #include <unordered_set>
 #include <vector>
 #include <set>
+#include <algorithm>
 #include <stack>
 #include <queue>
 #include <iostream>
@@ -31,23 +32,31 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
-
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
+bool isPalindrome(string str) {
+	return str == string(str.rbegin(), str.rend());
 }
 
+int main() {
+	long long T;
+	cin >> T;
+	vector<long long> product;
 
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+	for(int i = 100; i <= 999; ++i) {
+		for(int j = 100; j <= 999; ++j) {
+			long long m = i * j;
+			if(isPalindrome(to_string(m))) {
+				product.push_back(m);
+			}
+		}
 	}
+	sort(product.begin(), product.end());
+
+	while(T--) {
+		long long N;
+		cin >> N;
+
+		auto it = lower_bound(product.begin(), product.end(), N);
+		cout << product[it - product.begin() - 1] << endl;
+	}
+	return 0;
 }

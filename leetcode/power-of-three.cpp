@@ -31,23 +31,18 @@
 	
 using namespace std;
 
-long long n=1000000,dp[1000000];
-
-long long ans(long long i){
-    
-    if(i<n) return dp[i];
-	else return max(i, ans(i/2)+ans(i/3)+ ans(i/4));
+bool isPowerOfThree(int n) {
+	int m = pow(n, 1/3.0);
+    return (m * m * m) == n;
 }
 
-
-int main()	{
-    long long i;
-    dp[0]=0 ;
-    for( i=0;i<n;i++) {
-        dp[i]=max(i,dp[i/2]+dp[i/4]+dp[i/3]);
-    }
-    
-    while(cin>>i) {
-	    cout <<ans(i) << endl;
+int main() {
+	int T;
+	cin >> T;
+	while (T--) {
+		int n;
+		cin >> n;
+		cout << isPowerOfThree(n);
 	}
+	return 0;
 }
