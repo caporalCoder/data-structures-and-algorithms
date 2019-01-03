@@ -31,29 +31,38 @@
 	
 using namespace std;
 
-int main() {
-	int n, k;
-    std::cin >> n >> k;
 
-    std::vector<int> nums(n);
-    std::vector<int> modulos(k);
+unsigned long long z_function(string s) {
+    int n = (int) s.size();
+    vector<unsigned long long> z(n, 0);
+    for(int i = 1, l = 0, r = 0; i < n; ++i) {
+        if (i <= r) {
+            z[i] = min ((unsigned long long) r - i + 1, z[i - l]);
+        }
+        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {
+            ++z[i];
+        }
+        if (i + z[i] - 1 > r) {
+            l = i, r = i + z[i] - 1;
+        }
+    }
+    unsigned long long r = n;
+    for(int i = 0; i < n; ++i) {
+        r += z[i];
+    }
+    return r;
+}
+
+int main() {
+	int n;
+
+    cin >> n;
 
     for(int i = 0; i < n; ++i) {
-        cin >> nums[i];
-        ++modulos[nums[i] % k];
+        string str;
+        cin >> str;
+       
+        cout << z_function(str) << endl;
     }
-
-    if ((k & 1) == 0) {
-        modulos[k/2] = min(1, modulos[k/2]);
-    }
-
-    int maxLen = min(1, modulos[0]);
-
-    for(int i = 1; i <= k/2; ++i) {
-        maxLen += max(modulos[i], modulos[k - i]);
-    }
-
-    cout << maxLen << endl;
-
 	return 0;
 }

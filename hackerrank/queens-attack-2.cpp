@@ -32,28 +32,6 @@
 using namespace std;
 
 int main() {
-	int n, k;
-    std::cin >> n >> k;
-
-    std::vector<int> nums(n);
-    std::vector<int> modulos(k);
-
-    for(int i = 0; i < n; ++i) {
-        cin >> nums[i];
-        ++modulos[nums[i] % k];
-    }
-
-    if ((k & 1) == 0) {
-        modulos[k/2] = min(1, modulos[k/2]);
-    }
-
-    int maxLen = min(1, modulos[0]);
-
-    for(int i = 1; i <= k/2; ++i) {
-        maxLen += max(modulos[i], modulos[k - i]);
-    }
-
-    cout << maxLen << endl;
-
+	
 	return 0;
 }
