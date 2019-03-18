@@ -32,24 +32,6 @@
 using namespace std;
 
 int main() {
-	unsigned long long n, k;
-    cin >> n >> k;
-    
-    unsigned long long a;
-    unordered_set<unsigned long long> nums;
-
-    for(int i = 0; i < n; ++i) {
-        cin >> a;
-        nums.insert(a);
-    }
-    int cpt = 0; 
-    for(unsigned long long elem: nums){
-        if (nums.count(elem + k)) {
-            ++cpt;
-        }
-    }
-
-    cout << cpt << endl;
-
+	
 	return 0;
 }
