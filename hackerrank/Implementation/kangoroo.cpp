@@ -49,7 +49,6 @@ int main() {
 
 	double k = float(x2 - x1) / (v1 - v2);
 
-	cout << k << endl;
 
 	if (k > 0 && (k - int(k)) == 0) {
 		cout << "YES" << endl;
