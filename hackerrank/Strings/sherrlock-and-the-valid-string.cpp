@@ -12,7 +12,6 @@
 #include <unordered_map>
 #include <set>
 #include <cmath>
-#include <bits/stdc++.h>
 #include <cstdio>
 #include <cstring>
 #include <chrono>
