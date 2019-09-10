@@ -18,49 +18,55 @@
 
 using namespace std;
 
-string superReducedString(string s) {
+string superReducedString(string s)
+{
 	bool change;
 
 	string m = "";
-	do {
+	do
+	{
 		change = false;
 		m = "";
 		int i = 1;
-		//cout << s.size() << endl;
-		if (s.size() == 1) return s;
+
+		if (s.size() == 1)
+			return s;
 
 		while (i < s.size()) {
 			if (s[i] != s[i - 1]) {
 				m += s[i - 1];
-			} else {
+			}
+			else {
 				change = true;
 				i++;
 			}
 			if (i == s.size() - 1) {
-					m += s[i];
-				}
-
+				m += s[i];
+			}
 			i++;
 		}
 		//cout << m << endl;
 		s = m;
-	} while(change);
+	} while (change);
 	return s;
 }
 
-
-int main() {
+int main()
+{
 
 	string str;
 
 	cin >> str;
 
 	string m = superReducedString(str);
-	if (m.size() == 0) {
-		cout << "Empty string" << endl;
-	} else {
+	if (m.size() == 0)
+	{
+		cout << "Empty String" << endl;
+	}
+	else
+	{
 		cout << m << endl;
 	}
-	
+
 	return 0;
 }
