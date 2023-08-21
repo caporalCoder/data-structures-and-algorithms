@@ -63,7 +63,7 @@ int main() {
 	for(long long i = 0; i < n; ++i) {
 		cin >> c;
 		long long k = b + c;
-		if (k >= c && k <= t) {
+		if (k >= s && k <= t) {
 			++orange;
 		}
 	}
