@@ -4,16 +4,11 @@
 
 // C++17 and more.
 
-int lcm(int a, int b) {
-    int hcf = std::gcd(a, b);
-    return (a * b) / hcf;
-}
-
 int getTotalX(const std::vector<int>& a, const std::vector<int>& b) {
     // Compute LCM of array 'a'
     int current_lcm = a[0];
     for(int num : a) {
-        current_lcm = lcm(current_lcm, num);
+        current_lcm = std::lcm(current_lcm, num);
     }
 
     // Compute GCD of array 'b'
